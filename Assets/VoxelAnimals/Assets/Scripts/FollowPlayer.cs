@@ -8,7 +8,7 @@ public class FollowPlayer : MonoBehaviour
 {
 
     public Transform Player;
-    private float aggroRange = 15f;
+    private float aggroRange = 100f;
     private NavMeshAgent navMeshAgent;
 
 
