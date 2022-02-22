@@ -7,7 +7,11 @@ using UnityEngine.AI;
 public class FollowPlayer : MonoBehaviour
 {
 
+
     public Transform Player;
+
+    private GameObject PlayerFile;
+
     private float aggroRange = 100f;
     private NavMeshAgent navMeshAgent;
 
@@ -17,6 +21,8 @@ public class FollowPlayer : MonoBehaviour
     {
 
         navMeshAgent = GetComponent<NavMeshAgent>();
+        PlayerFile = GameObject.Find("shadow");
+        Player = PlayerFile.transform;
 
 
     }
