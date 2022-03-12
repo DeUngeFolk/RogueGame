@@ -40,4 +40,15 @@ public class Player : MonoBehaviour
 
     }
 
+public int getMaxHealth(){
+
+    return maxHealth;
+}
+
+public int getCurrentHealth(){
+
+    return currentHealth;
+}
+
+
 }
