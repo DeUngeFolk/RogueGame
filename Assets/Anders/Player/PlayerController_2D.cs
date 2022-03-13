@@ -27,5 +27,25 @@ public class PlayerController_2D : MonoBehaviour
         movement *= Time.deltaTime;
 
         transform.Translate(movement);
+
+        // flip sprite:
+
+        Vector3 characterScale = transform.localScale;
+        if(inputX < 0){
+            characterScale.x = -1;
+
+
+        }
+
+        if(inputX > 0){
+            characterScale.x = 1;
+
+
+        }
+
+        transform.localScale = characterScale;
+
+
+        
     }
 }
