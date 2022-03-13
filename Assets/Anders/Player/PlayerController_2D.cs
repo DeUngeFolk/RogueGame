@@ -8,6 +8,7 @@ public class PlayerController_2D : MonoBehaviour
     public Vector2 speed = new Vector2(50, 50);
     public Animator animator;
 
+    
 
     // Update is called once per frame
     void Update()
@@ -24,13 +25,14 @@ public class PlayerController_2D : MonoBehaviour
 
         transform.Translate(movement);
 
+        
+
         // flip sprite:
 
         Vector3 characterScale = transform.localScale;
         if (inputX < 0)
         {
             characterScale.x = -1;
-
 
         }
 
