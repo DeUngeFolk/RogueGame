@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Enemy_master : MonoBehaviour
 {
 
-    public GameObject Player; 
+    public GameObject player; 
     public float Distance;
 
     public bool isAngered;
@@ -21,7 +21,7 @@ public class Enemy_master : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Distance = Vector3.Distance(Player.transform.position, this.transform.position);
+        Distance = Vector3.Distance(player.transform.position, this.transform.position);
 
         if(Distance <=5)
         {
@@ -36,7 +36,7 @@ public class Enemy_master : MonoBehaviour
         {
             _agent.isStopped = false;
             
-            _agent.SetDestination(Player.transform.position);
+            _agent.SetDestination(player.transform.position);
         }
         if(!isAngered)
         {
