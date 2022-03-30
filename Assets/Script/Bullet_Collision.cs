@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class Bullet_Collision : MonoBehaviour
 {
+    private GameObject attackable;
+    private GameObject player;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+    
+        player = GameObject.FindGameObjectWithTag("Player");
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 
@@ -16,4 +21,17 @@ public class Bullet_Collision : MonoBehaviour
     {
 
     }
+
+
+private void OnTriggerEnter2D(Collider2D collision){
+
+ var attackable = collision.GameObject.GetComponent<Attackable>();
+
+if(attackable){
+
+
+
+} 
+}
+
 }
