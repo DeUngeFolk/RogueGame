@@ -8,6 +8,10 @@ public class PlayerController_2D : MonoBehaviour
     public Vector2 speed = new Vector2(50, 50);
     public Animator animator;
 
+   public SpriteRenderer m_SpriteRenderer;
+   bool flipX;
+
+
     
 
     // Update is called once per frame
@@ -32,13 +36,13 @@ public class PlayerController_2D : MonoBehaviour
         Vector3 characterScale = transform.localScale;
         if (inputX < 0)
         {
-            characterScale.x = -1;
+            m_SpriteRenderer.flipX = true;
 
         }
 
         if (inputX > 0)
         {
-            characterScale.x = 1;
+            m_SpriteRenderer.flipX = false;
 
 
         }
