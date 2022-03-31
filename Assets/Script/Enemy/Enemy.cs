@@ -2,40 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, Attackable
 {
     public int maxHealth = 100;
-    public int currentHealth;
-
-    public EnemyHealth healthBar;
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
 
-        currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        
+    }
+
+    public int CurrentHealth
+    {
+
+get; 
+
+private set;
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
 
-            TakeDamage(10);
-
-        }
-
-    }
-
-    void TakeDamage(int damage)
+   public void takeDamage(int damage)
     {
 
-        currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
+        CurrentHealth -= damage;
+
 
     }
 }

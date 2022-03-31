@@ -5,7 +5,9 @@ using UnityEngine;
 public interface Attackable
 {
 
-    void takeDamage();
+    int CurrentHealth {get;}
+
+    void takeDamage(int damage);
 
 }
 
