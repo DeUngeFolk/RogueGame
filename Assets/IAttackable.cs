@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Attackable
+public interface IAttackable
 {
-
-    int CurrentHealth {get;}
+    int currentHealth { get; }
 
     void takeDamage(int damage);
-
 }
-
