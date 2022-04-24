@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Necromancer : MonoBehaviour, IEnemy
+public class Necromancer : MonoBehaviour, IAttackable
 {
     
 
@@ -15,7 +15,7 @@ public class Necromancer : MonoBehaviour, IEnemy
     // Update is called once per frame
     void Update()
     {
-        Debug.Log (currentHealth);
+        
 
         if (0 >= currentHealth)
         {
