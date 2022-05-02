@@ -5,11 +5,14 @@ using UnityEngine;
 public class Necromancer : MonoBehaviour, IAttackable
 {
     
+    public HealthBar healthBar;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = 10;
+        maxHealth = 10;
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -28,7 +31,7 @@ public class Necromancer : MonoBehaviour, IAttackable
         // check to see if enemy got hit by  a bullet, if yes take 5dmg.
         GameObject bullet = col.gameObject;
 
-        if (bullet != null)
+        if (bullet.name == "Bullet(Clone)")
         {
             takeDamage(5);
             Debug.Log("enemy has taken 5 dmg");
@@ -40,6 +43,8 @@ public class Necromancer : MonoBehaviour, IAttackable
         Destroy (gameObject);
     }
 
+    
+    public int maxHealth{get; private set;}
     public bool alive { get; private set; }
 
     public int currentHealth { get; private set; }
@@ -47,5 +52,6 @@ public class Necromancer : MonoBehaviour, IAttackable
     public void takeDamage(int damage)
     {
         currentHealth = currentHealth - damage;
+        healthBar.SetHealth(currentHealth);
     }
 }
