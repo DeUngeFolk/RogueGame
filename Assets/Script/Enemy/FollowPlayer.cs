@@ -3,51 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
 public class FollowPlayer : MonoBehaviour
 {
-
-
     public Transform Player;
 
-    private GameObject PlayerFile;
+    private Rigidbody2D rb;
 
-    private float aggroRange = 100f;
-    private NavMeshAgent navMeshAgent;
+    public float moveSpeed = 5f;
 
+    Vector2 movement;
 
     // Start is called before the first frame update
     void Start()
     {
-
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        PlayerFile = GameObject.Find("shadow");
-        Player = PlayerFile.transform;
-
-
+        rb = this.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Vector3 direction = Player.position - transform.position;
+        transform.position =
+            Vector2
+                .MoveTowards(transform.position,
+                Player.position,
+                moveSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, Player.position) < aggroRange)
+        //   float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        // direction.Normalize();
+        // movement = direction;
+    }
 
-        {
+    private void FixedUpdate()
+    {
+    }
 
-            navMeshAgent.isStopped = false;
-
-            navMeshAgent.SetDestination(Player.position);
-
-        }
-
-        else
-
-        {
-
-            navMeshAgent.isStopped = true;
-
-        }
-
+    void moveCharacter(Vector2 direction)
+    {
+        rb
+            .MovePosition((Vector2) transform.position +
+            (direction * moveSpeed * Time.deltaTime));
     }
 }
