@@ -10,9 +10,12 @@ public class PlayerStats : MonoBehaviour, IAttackable
 
     public int currentHealth { get; private set; }
 
-    float curTime = 0;
+    // damage timer variables
+    // Timer to track collision time
+    float _timeColliding;
 
-    float nextDamage = 1;
+    // Time before damage is taken, 1 second default
+    public float timeThreshold = 1f;
 
     public HealthBar healthBar;
 
@@ -35,17 +38,35 @@ public class PlayerStats : MonoBehaviour, IAttackable
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        GameObject enemy = col.gameObject;
-        if (enemy != null)
+        _timeColliding = 0f;
+
+        Debug.Log("enemy started colliding with player");
+
+        if (col.gameObject.tag == "Enemy")
         {
             takeDamage(5);
             Debug.Log("player has been hit!");
         }
     }
 
-    void onTriggerExit2D()
+    void OnTriggerStay2D(Collider2D col)
     {
-        Debug.Log("exited collider");
+        if (col.gameObject.tag == "Enemy")
+        {
+            // If the time is below the threshold, add the delta time
+            if (_timeColliding < timeThreshold)
+            {
+                _timeColliding += Time.deltaTime;
+            }
+            else
+            {
+                // Time is over theshold, player takes damage
+                takeDamage(5);
+
+                // Reset timer
+                _timeColliding = 0f;
+            }
+        }
     }
 
     void death()
