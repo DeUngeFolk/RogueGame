@@ -4,29 +4,32 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour, IAttackable
 {
-
-    public int maxHealth{get; private set;}
+    public int maxHealth { get; private set; }
 
     public bool alive { get; private set; }
 
     public int currentHealth { get; private set; }
 
-    public HealthBar healthBar;
+    // damage timer variables
+    // Timer to track collision time
+    float _timeColliding;
 
+    // Time before damage is taken, 1 second default
+    public float timeThreshold = 1f;
+
+    public HealthBar healthBar;
 
     // Start is called before the first frame update
     void Start()
     {
         maxHealth = 100;
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetMaxHealth (maxHealth);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-
         if (0 >= currentHealth)
         {
             death();
@@ -35,12 +38,34 @@ public class PlayerStats : MonoBehaviour, IAttackable
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        GameObject enemy = col.gameObject;
+        _timeColliding = 0f;
 
-        if(enemy != null){
+        Debug.Log("enemy started colliding with player");
+
+        if (col.gameObject.tag == "Enemy")
+        {
             takeDamage(5);
             Debug.Log("player has been hit!");
+        }
+    }
 
+    void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Enemy")
+        {
+            // If the time is below the threshold, add the delta time
+            if (_timeColliding < timeThreshold)
+            {
+                _timeColliding += Time.deltaTime;
+            }
+            else
+            {
+                // Time is over theshold, player takes damage
+                takeDamage(5);
+
+                // Reset timer
+                _timeColliding = 0f;
+            }
         }
     }
 
@@ -49,12 +74,9 @@ public class PlayerStats : MonoBehaviour, IAttackable
         Destroy (gameObject);
     }
 
-    
-
     public void takeDamage(int damage)
     {
         currentHealth = currentHealth - damage;
-        healthBar.SetHealth(currentHealth);
-        
+        healthBar.SetHealth (currentHealth);
     }
 }
