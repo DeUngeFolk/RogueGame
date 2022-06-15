@@ -40,6 +40,7 @@ public class Necromancer : MonoBehaviour, IAttackable
 
     void death()
     {
+        ScoreScript.scoreValue += 1;
         Destroy (gameObject);
     }
 
