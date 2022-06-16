@@ -26,4 +26,3 @@ public class SwampySpawner : MonoBehaviour
         StartCoroutine(spawnEnemy(interval, enemy));
     }
 }
-
