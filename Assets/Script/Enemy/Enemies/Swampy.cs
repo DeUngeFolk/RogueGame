@@ -5,14 +5,14 @@ using UnityEngine;
 public class Swampy : MonoBehaviour, IAttackable
 {
     
-    public HealthBar healthBar;
+   // public HealthBar healthBar;
 
     // Start is called before the first frame update
     void Start()
     {
         maxHealth = 5;
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+      //  healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -53,6 +53,6 @@ public class Swampy : MonoBehaviour, IAttackable
     public void takeDamage(int damage)
     {
         currentHealth = currentHealth - damage;
-        healthBar.SetHealth(currentHealth);
+    //    healthBar.SetHealth(currentHealth);
     }
 }

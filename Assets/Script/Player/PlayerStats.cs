@@ -19,14 +19,21 @@ public class PlayerStats : MonoBehaviour, IAttackable
     // Time before damage is taken, 1 second default
     public float timeThreshold = 1f;
 
-    public HealthBar healthBar;
+  //  public HealthBar healthBar;
 
     // Start is called before the first frame update
+    public Transform pfHealthBar;
     void Start()
     {
+
+        Transform healthBarTransform = Instantiate(pfHealthBar, new Vector3(0,-0.8f),Quaternion.identity);
+        healthBarTransform.transform.parent = gameObject.transform;
+        HealthBar healthBar = healthBarTransform.GetComponent<HealthBar>();
+
+      //  HealthSystem healthSystem = new HealthSystem(100);
         maxHealth = setMaxHealth;
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth (maxHealth);
+    //    healthBar.SetMaxHealth (maxHealth);
     }
 
     // Update is called once per frame
@@ -79,6 +86,6 @@ public class PlayerStats : MonoBehaviour, IAttackable
     public void takeDamage(int damage)
     {
         currentHealth = currentHealth - damage;
-        healthBar.SetHealth (currentHealth);
+     //   healthBar.SetHealth (currentHealth);
     }
 }

@@ -1,31 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class HealthBar : MonoBehaviour
-{
+public class HealthBar : MonoBehaviour {
 
-    public Slider slider;
-    public Gradient gradient;
-    public Image fill;
+    private Transform bar;
+    private HealthSystem healthSystem;
 
+    public void Setup(HealthSystem healthSystem) {
+      this.healthSystem = healthSystem;  
+      bar = transform.Find("Bar");
 
-    public void SetMaxHealth(int health)
-    {
-
-        slider.maxValue = health;
-        slider.value = health;
-
-        fill.color = gradient.Evaluate(1f);
-
+      healthSystem.onHealthChanged += healthSystem_OnHealthChanged;
     }
 
-    public void SetHealth(int health)
-    {
+    private void healthSystem_OnHealthChanged(object sender, System.EventArgs e){
+        bar.localScale = new Vector3(healthSystem.GetHealthPercent(),1);
+    }
 
-        slider.value = health;
-        fill.color = gradient.Evaluate(slider.normalizedValue);
+    public void SetSize(float sizeNormalized) {
+        bar.localScale = new Vector3(sizeNormalized, 1f);
+    }
+
+    public void SetColor(Color color){
+
+        bar.Find("BarSprite").GetComponent<SpriteRenderer>().color = color;
 
     }
 

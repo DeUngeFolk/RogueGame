@@ -5,15 +5,20 @@ using UnityEngine;
 public class Necromancer : MonoBehaviour, IAttackable
 {
     
-    public HealthBar healthBar;
+  //  public HealthBar healthBar;
     public int setMaxHealth;
+    public Transform pfHealthBar;
 
     // Start is called before the first frame update
     void Start()
     {
+        Transform healthBarTransform = Instantiate(pfHealthBar, new Vector3(0,-0.8f),Quaternion.identity);
+        healthBarTransform.transform.parent = gameObject.transform;
+        HealthBar healthBar = healthBarTransform.GetComponent<HealthBar>();
+
         maxHealth = setMaxHealth;
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+    //    healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -54,6 +59,6 @@ public class Necromancer : MonoBehaviour, IAttackable
     public void takeDamage(int damage)
     {
         currentHealth = currentHealth - damage;
-        healthBar.SetHealth(currentHealth);
+    //    healthBar.SetHealth(currentHealth);
     }
 }
