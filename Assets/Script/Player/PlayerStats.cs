@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour, IAttackable
 {
-    public int maxHealth { get; private set; }
+    public int maxHealth { get; set; }
+
+    public int setMaxHealth;
 
     public bool alive { get; private set; }
 
@@ -22,7 +24,7 @@ public class PlayerStats : MonoBehaviour, IAttackable
     // Start is called before the first frame update
     void Start()
     {
-        maxHealth = 100;
+        maxHealth = setMaxHealth;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth (maxHealth);
     }

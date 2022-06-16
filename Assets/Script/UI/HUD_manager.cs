@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HUDmanager : MonoBehaviour
+public class HUD_manager : MonoBehaviour
 {
 
     public Text health_Text;
@@ -26,4 +26,5 @@ public class HUDmanager : MonoBehaviour
     {
         health_Text.text = player.currentHealth.ToString() + "/" + player.maxHealth.ToString();
     }
+
 }

@@ -6,11 +6,12 @@ public class Necromancer : MonoBehaviour, IAttackable
 {
     
     public HealthBar healthBar;
+    public int setMaxHealth;
 
     // Start is called before the first frame update
     void Start()
     {
-        maxHealth = 10;
+        maxHealth = setMaxHealth;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
