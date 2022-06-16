@@ -11,7 +11,7 @@ public class Necromancer : MonoBehaviour, IAttackable
 
     // Start is called before the first frame update
     void Start()
-    {
+    { // TODO: change the vector3 below, to figure out where to spawn healthbar based on enemy location.
         Transform healthBarTransform = Instantiate(pfHealthBar, new Vector3(0,-0.8f),Quaternion.identity);
         healthBarTransform.transform.parent = gameObject.transform;
         HealthBar healthBar = healthBarTransform.GetComponent<HealthBar>();
