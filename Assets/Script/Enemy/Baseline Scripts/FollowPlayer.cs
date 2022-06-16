@@ -18,7 +18,7 @@ public class FollowPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
+        Player = GameObject.Find("Player");
         playerTransform = Player.GetComponent<Transform>();
         rb = this.GetComponent<Rigidbody2D>();
     }

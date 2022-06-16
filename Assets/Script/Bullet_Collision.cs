@@ -12,7 +12,7 @@ public class Bullet_Collision : MonoBehaviour
     void Start()
     {
         seconds = 0;
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.Find("Player");
         Physics2D
             .IgnoreCollision(player.GetComponent<Collider2D>(),
             GetComponent<Collider2D>());
