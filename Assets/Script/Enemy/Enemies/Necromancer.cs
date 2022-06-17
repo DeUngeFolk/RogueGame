@@ -4,28 +4,30 @@ using UnityEngine;
 
 public class Necromancer : MonoBehaviour, IAttackable
 {
-    
-  //  public HealthBar healthBar;
+    //  public HealthBar healthBar;
     public int setMaxHealth;
+
     public Transform pfHealthBar;
 
     // Start is called before the first frame update
     void Start()
-    { // TODO: change the vector3 below, to figure out where to spawn healthbar based on enemy location.
-        Transform healthBarTransform = Instantiate(pfHealthBar, new Vector3(0,-0.8f),Quaternion.identity);
+    {
+        // TODO: change the vector3 below, to figure out where to spawn healthbar based on enemy location.
+        Transform healthBarTransform =
+            Instantiate(pfHealthBar,
+            new Vector3(gameObject.transform.position.x,gameObject.transform.position.y -0.8f),
+            Quaternion.identity);
         healthBarTransform.transform.parent = gameObject.transform;
         HealthBar healthBar = healthBarTransform.GetComponent<HealthBar>();
 
         maxHealth = setMaxHealth;
         currentHealth = maxHealth;
-    //    healthBar.SetMaxHealth(maxHealth);
+        //    healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-
         if (0 >= currentHealth)
         {
             death();
@@ -50,8 +52,8 @@ public class Necromancer : MonoBehaviour, IAttackable
         Destroy (gameObject);
     }
 
-    
-    public int maxHealth{get; private set;}
+    public int maxHealth { get; private set; }
+
     public bool alive { get; private set; }
 
     public int currentHealth { get; private set; }
@@ -59,6 +61,6 @@ public class Necromancer : MonoBehaviour, IAttackable
     public void takeDamage(int damage)
     {
         currentHealth = currentHealth - damage;
-    //    healthBar.SetHealth(currentHealth);
+        //    healthBar.SetHealth(currentHealth);
     }
 }
