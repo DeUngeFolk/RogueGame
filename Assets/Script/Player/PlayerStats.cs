@@ -79,4 +79,11 @@ public class PlayerStats : MonoBehaviour, IAttackable
         currentHealth = currentHealth - damage;
         healthBar.SetHealth (currentHealth);
     }
+
+public void healPlayer(int healAmount)
+    {
+        currentHealth = currentHealth + healAmount;
+        healthBar.SetHealth (currentHealth);
+    }
+
 }

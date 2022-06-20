@@ -7,11 +7,9 @@ using UnityEngine;
 public class HealthBuff : PowerUpEffect
 {
     public float amount;
-
-
-
-    public override void Apply(GameObject target)
+    public GameObject player;
+    public override void Apply(GameObject player)
     {
-        target.GetComponent<currentHealth>().health.value += amount;
+        player.GetComponent<PlayerStats>().healPlayer(5);
     }
 }
