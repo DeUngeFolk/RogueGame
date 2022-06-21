@@ -3,31 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace hp.HealthSystemCM {
-public class HealthBar : MonoBehaviour {
+/// <summary>
+    /// Simple UI Health Bar, sets the Image fillAmount based on the linked HealthSystem
+    /// Check the Demo scene for a usage example
+    /// </summary>
+    public class HealthBarUI : MonoBehaviour {
 
-
-
-    private Transform bar;
-
-
- [Tooltip("Optional; Either assign a reference in the Editor (that implements IGetHealthSystem) or manually call SetHealthSystem()")]
+        [Tooltip("Optional; Either assign a reference in the Editor (that implements IGetHealthSystem) or manually call SetHealthSystem()")]
         [SerializeField] private GameObject getHealthSystemGameObject;
 
         [Tooltip("Image to show the Health Bar, should be set as Fill, the script modifies fillAmount")]
         [SerializeField] private Image image;
 
-    private HealthSystem healthSystem;
+
+        private HealthSystem healthSystem;
 
 
-     private void Start() {
+        private void Start() {
             if (HealthSystem.TryGetHealthSystem(getHealthSystemGameObject, out HealthSystem healthSystem)) {
                 SetHealthSystem(healthSystem);
             }
         }
 
-
-         /// <summary>
+        /// <summary>
         /// Set the Health System for this Health Bar
         /// </summary>
         public void SetHealthSystem(HealthSystem healthSystem) {
@@ -41,8 +41,7 @@ public class HealthBar : MonoBehaviour {
             healthSystem.OnHealthChanged += HealthSystem_OnHealthChanged;
         }
 
-
-            /// <summary>
+        /// <summary>
         /// Event fired from the Health System when Health Amount changes, update Health Bar
         /// </summary>
         private void HealthSystem_OnHealthChanged(object sender, System.EventArgs e) {
@@ -63,28 +62,5 @@ public class HealthBar : MonoBehaviour {
             healthSystem.OnHealthChanged -= HealthSystem_OnHealthChanged;
         }
 
-    public void Setup(HealthSystem healthSystem) {
-      this.healthSystem = healthSystem;  
-      bar = transform.Find("BarSprite");
-
-      healthSystem.OnHealthChanged += healthSystem_OnHealthChanged;
     }
-
-      
-
-    private void healthSystem_OnHealthChanged(object sender, System.EventArgs e){
-        // bar.localScale = new Vector3(healthSystem.GetHealthPercent(),1);
-    }
-
-    public void SetSize(float sizeNormalized) {
-        bar.localScale = new Vector3(sizeNormalized, 1f);
-    }
-
-    public void SetColor(Color color){
-
-        bar.Find("BarSprite").GetComponent<SpriteRenderer>().color = color;
-
-    }
-
-}
 }

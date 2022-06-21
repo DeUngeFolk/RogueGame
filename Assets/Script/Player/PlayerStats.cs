@@ -22,13 +22,13 @@ public class PlayerStats : MonoBehaviour, IAttackable
   //  public HealthBar healthBar;
 
     // Start is called before the first frame update
-    public Transform pfHealthBar;
+   // public Transform pfHealthBar;
     void Start()
     {
 
-        Transform healthBarTransform = Instantiate(pfHealthBar, new Vector3(0,-0.8f),Quaternion.identity);
-        healthBarTransform.transform.parent = gameObject.transform;
-        HealthBar healthBar = healthBarTransform.GetComponent<HealthBar>();
+      //  Transform healthBarTransform = Instantiate(pfHealthBar, new Vector3(0,-0.8f),Quaternion.identity);
+       // healthBarTransform.transform.parent = gameObject.transform;
+       // HealthBar healthBar = healthBarTransform.GetComponent<HealthBar>();
 
       //  HealthSystem healthSystem = new HealthSystem(100);
         maxHealth = setMaxHealth;

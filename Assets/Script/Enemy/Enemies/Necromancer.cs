@@ -2,65 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Necromancer : MonoBehaviour, IAttackable
+namespace hp.HealthSystemCM
 {
-    //  public HealthBar healthBar;
-    public int setMaxHealth;
-
-    public Transform pfHealthBar;
-
-    // Start is called before the first frame update
-    void Start()
+    public class Necromancer : MonoBehaviour, IGetHealthSystem
     {
-        // TODO: change the vector3 below, to figure out where to spawn healthbar based on enemy location.
-        Transform healthBarTransform =
-            Instantiate(pfHealthBar,
-            new Vector3(gameObject.transform.position.x,gameObject.transform.position.y -0.8f),
-            Quaternion.identity);
-        healthBarTransform.transform.parent = gameObject.transform;
-        HealthBar healthBar = healthBarTransform.GetComponent<HealthBar>();
+        private HealthSystem healthSystem;
+        public float maxHealth;
 
-        maxHealth = setMaxHealth;
-        currentHealth = maxHealth;
-        //    healthBar.SetMaxHealth(maxHealth);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (0 >= currentHealth)
+        // Start is called before the first frame update
+        private void Awake()
         {
-            death();
+            healthSystem = new HealthSystem(maxHealth);
+            healthSystem.OnDead += HealthSystem_OnDead;
         }
-    }
 
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        // check to see if enemy got hit by  a bullet, if yes take 5dmg.
-        GameObject bullet = col.gameObject;
-
-        if (bullet.name == "Bullet(Clone)")
+        // Update is called once per frame
+        void Update()
         {
-            takeDamage(5);
-            Debug.Log("enemy has taken 5 dmg");
         }
-    }
 
-    void death()
-    {
-        ScoreScript.scoreValue += 1;
-        Destroy (gameObject);
-    }
+        void OnTriggerEnter2D(Collider2D col)
+        {
+            // check to see if enemy got hit by  a bullet, if yes take 5dmg.
+            GameObject bullet = col.gameObject;
 
-    public int maxHealth { get; private set; }
+            if (bullet.name == "Bullet(Clone)")
+            {
+                Damage();
+                Debug.Log("enemy has taken 5 dmg");
+            }
+        }
 
-    public bool alive { get; private set; }
+        void death()
+        {
+            ScoreScript.scoreValue += 1;
+            Destroy (gameObject);
+        }
 
-    public int currentHealth { get; private set; }
+        public void Damage()
+        {
+            healthSystem.Damage(40);
+        }
 
-    public void takeDamage(int damage)
-    {
-        currentHealth = currentHealth - damage;
-        //    healthBar.SetHealth(currentHealth);
+        private void HealthSystem_OnDead(object sender, System.EventArgs e)
+        {
+            Destroy (gameObject);
+        }
+
+        public HealthSystem GetHealthSystem()
+        {
+            return healthSystem;
+        }
     }
 }
