@@ -1,48 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using hp.HealthSystemCM;
 
-public class PlayerStats : MonoBehaviour, IAttackable
+public class PlayerStats : MonoBehaviour, IGetHealthSystem
+
 {
-    public int maxHealth { get; set; }
-
-    public int setMaxHealth;
-
-    public bool alive { get; private set; }
-
-    public int currentHealth { get; private set; }
-
-    // damage timer variables
-    // Timer to track collision time
+    public int maxHealth;
+   
     float _timeColliding;
 
-    // Time before damage is taken, 1 second default
+   
     public float timeThreshold = 1f;
 
-  //  public HealthBar healthBar;
-
-    // Start is called before the first frame update
-   // public Transform pfHealthBar;
-    void Start()
-    {
-
-      //  Transform healthBarTransform = Instantiate(pfHealthBar, new Vector3(0,-0.8f),Quaternion.identity);
-       // healthBarTransform.transform.parent = gameObject.transform;
-       // HealthBar healthBar = healthBarTransform.GetComponent<HealthBar>();
-
-      //  HealthSystem healthSystem = new HealthSystem(100);
-        maxHealth = setMaxHealth;
-        currentHealth = maxHealth;
-    //    healthBar.SetMaxHealth (maxHealth);
-    }
+private HealthSystem healthSystem;
+  
+     private void Awake()
+        {
+            healthSystem = new HealthSystem(maxHealth);
+            healthSystem.OnDead += HealthSystem_OnDead;
+        }
 
     // Update is called once per frame
     void Update()
     {
-        if (0 >= currentHealth)
-        {
-            death();
-        }
+        
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -53,7 +35,7 @@ public class PlayerStats : MonoBehaviour, IAttackable
 
         if (col.gameObject.tag == "Enemy")
         {
-            takeDamage(5);
+            Damage(5);
             Debug.Log("player has been hit!");
         }
     }
@@ -70,7 +52,7 @@ public class PlayerStats : MonoBehaviour, IAttackable
             else
             {
                 // Time is over theshold, player takes damage
-                takeDamage(5);
+                Damage(5);
 
                 // Reset timer
                 _timeColliding = 0f;
@@ -83,9 +65,17 @@ public class PlayerStats : MonoBehaviour, IAttackable
         Destroy (gameObject);
     }
 
-    public void takeDamage(int damage)
+    public void Damage(int damage)
     {
-        currentHealth = currentHealth - damage;
-     //   healthBar.SetHealth (currentHealth);
+        healthSystem.Damage(damage);
+        
     }
-}
+    private void HealthSystem_OnDead(object sender, System.EventArgs e)
+        {
+            Destroy (gameObject);
+        }
+
+    public HealthSystem GetHealthSystem()
+    {
+        return healthSystem;
+}}
