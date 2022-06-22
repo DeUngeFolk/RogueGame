@@ -79,3 +79,11 @@ private HealthSystem healthSystem;
     {
         return healthSystem;
 }}
+
+public void healPlayer(int healAmount)
+    {
+        currentHealth = currentHealth + healAmount;
+        healthBar.SetHealth (currentHealth);
+    }
+
+}
