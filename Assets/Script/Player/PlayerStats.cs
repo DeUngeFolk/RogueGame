@@ -8,14 +8,14 @@ public class PlayerStats : MonoBehaviour, IGetHealthSystem
 {
     public int maxHealth;
    
-    float _timeColliding;
-
-   
-    public float timeThreshold = 1f;
+   private float _timeColliding;
+   private float timeThreshold = 1f;
 
 private HealthSystem healthSystem;
-  
-     private void Awake()
+
+    float IGetHealthSystem.maxHealth => maxHealth;
+
+    private void Awake()
         {
             healthSystem = new HealthSystem(maxHealth);
             healthSystem.OnDead += HealthSystem_OnDead;

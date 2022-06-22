@@ -1,3 +1,4 @@
+/*
 using UnityEngine;
 
 namespace hp.HealthSystemCM
@@ -37,3 +38,4 @@ namespace hp.HealthSystemCM
         }
     }
 }
+*/

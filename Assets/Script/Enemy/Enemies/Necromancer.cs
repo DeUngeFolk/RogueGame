@@ -9,6 +9,8 @@ public class Necromancer : MonoBehaviour, IGetHealthSystem
 
     public float maxHealth;
 
+    float IGetHealthSystem.maxHealth => maxHealth;
+
     private void Awake()
     {
         healthSystem = new HealthSystem(maxHealth);
