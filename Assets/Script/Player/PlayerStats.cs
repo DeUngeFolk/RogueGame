@@ -82,8 +82,9 @@ private HealthSystem healthSystem;
 
 public void healPlayer(int healAmount)
     {
-       // currentHealth = currentHealth + healAmount;
-       // healthBar.SetHealth (currentHealth);
+
+        healthSystem.Heal(healAmount);
+      
     }
 }
 
