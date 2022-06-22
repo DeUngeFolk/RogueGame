@@ -18,6 +18,8 @@ namespace hp.HealthSystemCM
 
         private float healthMax;
         private float health;
+        
+      
 
         /// <summary>
         /// Construct a HealthSystem, receives the health max and sets current health to that value
@@ -69,6 +71,7 @@ namespace hp.HealthSystemCM
         /// </summary>
         public void Die() {
             OnDead?.Invoke(this, EventArgs.Empty);
+            
         }
 
         /// <summary>

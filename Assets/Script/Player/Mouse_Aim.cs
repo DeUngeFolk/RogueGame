@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mouse_Aim : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    public Rigidbody2D firePoint;
     public Camera cam;
 
     Vector2 mousePosition;
@@ -22,9 +22,9 @@ public class Mouse_Aim : MonoBehaviour
     void FixedUpdate()
     {
 
-        Vector2 lookDir = mousePosition - rb.position;
+        Vector2 lookDir = mousePosition - firePoint.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = angle;
+        firePoint.rotation = angle;
 
 
 

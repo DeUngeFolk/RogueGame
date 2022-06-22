@@ -15,6 +15,7 @@ public class Necromancer : MonoBehaviour, IGetHealthSystem
     {
         healthSystem = new HealthSystem(maxHealth);
         healthSystem.OnDead += HealthSystem_OnDead;
+        
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -25,7 +26,7 @@ public class Necromancer : MonoBehaviour, IGetHealthSystem
         if (bullet.name == "Bullet(Clone)")
         {
             Damage(5);
-            Debug.Log("enemy has taken 5 dmg");
+           // Debug.Log("enemy has taken 5 dmg");
         }
     }
 

@@ -5,10 +5,10 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject swarmerPrefab;
+    private GameObject swarmerPrefab; // Enemy prefab to spawn
 
     [SerializeField]
-    private float swarmerInterval = 3.5f;
+    private float swarmerInterval = 3.5f; // spawn interval
 
     // Start is called before the first frame update
     void Start()

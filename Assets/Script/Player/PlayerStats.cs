@@ -4,28 +4,23 @@ using UnityEngine;
 using hp.HealthSystemCM;
 
 public class PlayerStats : MonoBehaviour, IGetHealthSystem
-
 {
     public int maxHealth;
-   
-   private float _timeColliding;
-   private float timeThreshold = 1f;
 
-private HealthSystem healthSystem;
+    private float _timeColliding;
+
+    private float timeThreshold = 1f;
+
+    private HealthSystem healthSystem;
 
     float IGetHealthSystem.maxHealth => maxHealth;
 
     private void Awake()
-        {
-            healthSystem = new HealthSystem(maxHealth);
-            healthSystem.OnDead += HealthSystem_OnDead;
-        }
-
-    // Update is called once per frame
-    void Update()
     {
-        
+        healthSystem = new HealthSystem(maxHealth);
+        healthSystem.OnDead += HealthSystem_OnDead;
     }
+
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -60,31 +55,23 @@ private HealthSystem healthSystem;
         }
     }
 
-    void death()
+    public void Damage(int damage)
+    {
+        healthSystem.Damage (damage);
+    }
+
+    private void HealthSystem_OnDead(object sender, System.EventArgs e)
     {
         Destroy (gameObject);
     }
 
-    public void Damage(int damage)
-    {
-        healthSystem.Damage(damage);
-        
-    }
-    private void HealthSystem_OnDead(object sender, System.EventArgs e)
-        {
-            Destroy (gameObject);
-        }
-
     public HealthSystem GetHealthSystem()
     {
         return healthSystem;
-}
+    }
 
-public void healPlayer(int healAmount)
+    public void healPlayer(int healAmount)
     {
-
-        healthSystem.Heal(healAmount);
-      
+        healthSystem.Heal (healAmount);
     }
 }
-

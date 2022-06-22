@@ -8,9 +8,6 @@ public class FollowPlayer : MonoBehaviour
    // public Transform Player;
     public GameObject Player;
     private Transform playerTransform;
-
-    private Rigidbody2D rb;
-
     public float moveSpeed = 5f;
 
     Vector2 movement;
@@ -20,7 +17,7 @@ public class FollowPlayer : MonoBehaviour
     {
         Player = GameObject.Find("Player");
         playerTransform = Player.GetComponent<Transform>();
-        rb = this.GetComponent<Rigidbody2D>();
+       
     }
 
     // Update is called once per frame
@@ -33,19 +30,9 @@ public class FollowPlayer : MonoBehaviour
                 playerTransform.position,
                 moveSpeed * Time.deltaTime);
 
-        //   float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        // direction.Normalize();
-        // movement = direction;
+       
     }
 
-    private void FixedUpdate()
-    {
-    }
 
-    void moveCharacter(Vector2 direction)
-    {
-        rb
-            .MovePosition((Vector2) transform.position +
-            (direction * moveSpeed * Time.deltaTime));
-    }
+
 }

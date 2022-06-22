@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using hp.HealthSystemCM;
 
 public class Bullet_Collision : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class Bullet_Collision : MonoBehaviour
     void Update()
     {
         seconds+=1;
-        if (seconds > 60*5) // f*s - f=60frames, s= amount of seconds before despawn
+        if (seconds > 60*5) // f*s - f=60frames, s = amount of seconds before despawn
         {
             Destroy (gameObject);
         }
@@ -30,8 +31,8 @@ public class Bullet_Collision : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("hello");
-        IAttackable attackable = col.GetComponent<IAttackable>();
+      //  Debug.Log("hello");
+        IGetHealthSystem attackable = col.GetComponent<IGetHealthSystem>();
 
         if (attackable != null)
         {
