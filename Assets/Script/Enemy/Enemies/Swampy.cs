@@ -1,29 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using hp.HealthSystemCM;
 
-public class Swampy : MonoBehaviour, IAttackable
+public class Swampy : MonoBehaviour, IGetHealthSystem
 {
-    
-   // public HealthBar healthBar;
+    private HealthSystem healthSystem;
 
-    // Start is called before the first frame update
-    void Start()
+    public float maxHealth;
+
+    private void Awake()
     {
-        maxHealth = 5;
-        currentHealth = maxHealth;
-      //  healthBar.SetMaxHealth(maxHealth);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-
-        if (0 >= currentHealth)
-        {
-            death();
-        }
+        healthSystem = new HealthSystem(maxHealth);
+        healthSystem.OnDead += HealthSystem_OnDead;
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -33,26 +22,24 @@ public class Swampy : MonoBehaviour, IAttackable
 
         if (bullet.name == "Bullet(Clone)")
         {
-            takeDamage(5);
+            Damage(5);
             Debug.Log("enemy has taken 5 dmg");
         }
     }
 
-    void death()
+    public void Damage(int damage)
+    {
+        healthSystem.Damage (damage);
+    }
+
+    private void HealthSystem_OnDead(object sender, System.EventArgs e)
     {
         ScoreScript.scoreValue += 1;
         Destroy (gameObject);
     }
 
-    
-    public int maxHealth{get; private set;}
-    public bool alive { get; private set; }
-
-    public int currentHealth { get; private set; }
-
-    public void takeDamage(int damage)
+    public HealthSystem GetHealthSystem()
     {
-        currentHealth = currentHealth - damage;
-    //    healthBar.SetHealth(currentHealth);
+        throw new System.NotImplementedException();
     }
 }

@@ -1,57 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using hp.HealthSystemCM;
 
-namespace hp.HealthSystemCM
+public class Necromancer : MonoBehaviour, IGetHealthSystem
 {
-    public class Necromancer : MonoBehaviour, IGetHealthSystem
+    private HealthSystem healthSystem;
+
+    public float maxHealth;
+
+    private void Awake()
     {
-        private HealthSystem healthSystem;
-        public float maxHealth;
+        healthSystem = new HealthSystem(maxHealth);
+        healthSystem.OnDead += HealthSystem_OnDead;
+    }
 
-        // Start is called before the first frame update
-        private void Awake()
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        // check to see if enemy got hit by  a bullet, if yes take 5dmg.
+        GameObject bullet = col.gameObject;
+
+        if (bullet.name == "Bullet(Clone)")
         {
-            healthSystem = new HealthSystem(maxHealth);
-            healthSystem.OnDead += HealthSystem_OnDead;
+            Damage(5);
+            Debug.Log("enemy has taken 5 dmg");
         }
+    }
 
-        // Update is called once per frame
-        void Update()
-        {
-        }
+    public void Damage(int damage)
+    {
+        healthSystem.Damage (damage);
+    }
 
-        void OnTriggerEnter2D(Collider2D col)
-        {
-            // check to see if enemy got hit by  a bullet, if yes take 5dmg.
-            GameObject bullet = col.gameObject;
+    private void HealthSystem_OnDead(object sender, System.EventArgs e)
+    {
+        ScoreScript.scoreValue += 1;
+        Destroy (gameObject);
+    }
 
-            if (bullet.name == "Bullet(Clone)")
-            {
-                Damage();
-                Debug.Log("enemy has taken 5 dmg");
-            }
-        }
-
-        void death()
-        {
-            ScoreScript.scoreValue += 1;
-            Destroy (gameObject);
-        }
-
-        public void Damage()
-        {
-            healthSystem.Damage(40);
-        }
-
-        private void HealthSystem_OnDead(object sender, System.EventArgs e)
-        {
-            Destroy (gameObject);
-        }
-
-        public HealthSystem GetHealthSystem()
-        {
-            return healthSystem;
-        }
+    public HealthSystem GetHealthSystem()
+    {
+        return healthSystem;
     }
 }
