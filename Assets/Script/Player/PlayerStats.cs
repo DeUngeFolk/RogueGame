@@ -78,12 +78,12 @@ private HealthSystem healthSystem;
     public HealthSystem GetHealthSystem()
     {
         return healthSystem;
-}}
+}
 
 public void healPlayer(int healAmount)
     {
-        currentHealth = currentHealth + healAmount;
-        healthBar.SetHealth (currentHealth);
+       // currentHealth = currentHealth + healAmount;
+       // healthBar.SetHealth (currentHealth);
     }
-
 }
+
