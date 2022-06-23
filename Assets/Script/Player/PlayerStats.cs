@@ -7,7 +7,7 @@ public class PlayerStats : MonoBehaviour, IGetHealthSystem
 {
     public int maxHealth;
 
-    private int dmgStat;
+    public int dmgStat;
 
     private float _timeColliding;
 
@@ -16,6 +16,10 @@ public class PlayerStats : MonoBehaviour, IGetHealthSystem
     private HealthSystem healthSystem;
 
     float IGetHealthSystem.maxHealth => maxHealth;
+
+    private void Start()
+    {
+    }
 
     private void Awake()
     {
@@ -74,10 +78,5 @@ public class PlayerStats : MonoBehaviour, IGetHealthSystem
     public void healPlayer(int healAmount)
     {
         healthSystem.Heal (healAmount);
-    }
-
-    public int getDmgStat()
-    {
-        return dmgStat;
     }
 }

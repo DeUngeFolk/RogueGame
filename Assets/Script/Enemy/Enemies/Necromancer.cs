@@ -24,8 +24,7 @@ public class Necromancer : MonoBehaviour, IGetHealthSystem
     private void Start()
     {
         player = GameObject.Find("Player");
-        dmgStat = player.GetComponent<PlayerStats>().getDmgStat();
-        Debug.Log (dmgStat);
+        dmgStat = player.GetComponent<PlayerStats>().dmgStat;
     }
 
     void OnTriggerEnter2D(Collider2D col)
