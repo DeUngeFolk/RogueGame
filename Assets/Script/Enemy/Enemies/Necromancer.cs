@@ -9,13 +9,23 @@ public class Necromancer : MonoBehaviour, IGetHealthSystem
 
     public float maxHealth;
 
+    public GameObject player;
+
+    private int dmgStat;
+
     float IGetHealthSystem.maxHealth => maxHealth;
 
     private void Awake()
     {
         healthSystem = new HealthSystem(maxHealth);
         healthSystem.OnDead += HealthSystem_OnDead;
-        
+    }
+
+    private void Start()
+    {
+        player = GameObject.Find("Player");
+        dmgStat = player.GetComponent<PlayerStats>().getDmgStat();
+        Debug.Log (dmgStat);
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -25,15 +35,14 @@ public class Necromancer : MonoBehaviour, IGetHealthSystem
 
         if (bullet.name == "Bullet(Clone)")
         {
-            
-            Damage(5);
-           // Debug.Log("enemy has taken 5 dmg");
+            Damage (dmgStat);
+            // Debug.Log("enemy has taken 5 dmg");
         }
     }
 
     public void Damage(int damage)
     {
-        DamagePopup.Create(transform.position + new Vector3(8,0), damage);
+        DamagePopup.Create(transform.position + new Vector3(8, 0), damage);
         healthSystem.Damage (damage);
     }
 

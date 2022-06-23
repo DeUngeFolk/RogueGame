@@ -7,6 +7,8 @@ public class PlayerStats : MonoBehaviour, IGetHealthSystem
 {
     public int maxHealth;
 
+    private int dmgStat;
+
     private float _timeColliding;
 
     private float timeThreshold = 1f;
@@ -20,7 +22,6 @@ public class PlayerStats : MonoBehaviour, IGetHealthSystem
         healthSystem = new HealthSystem(maxHealth);
         healthSystem.OnDead += HealthSystem_OnDead;
     }
-
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -73,5 +74,10 @@ public class PlayerStats : MonoBehaviour, IGetHealthSystem
     public void healPlayer(int healAmount)
     {
         healthSystem.Heal (healAmount);
+    }
+
+    public int getDmgStat()
+    {
+        return dmgStat;
     }
 }

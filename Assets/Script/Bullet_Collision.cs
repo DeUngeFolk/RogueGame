@@ -8,6 +8,7 @@ public class Bullet_Collision : MonoBehaviour
     private GameObject player;
 
     private int seconds;
+    public int damage;
 
     // Start is called before the first frame update
     void Start()
