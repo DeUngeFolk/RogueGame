@@ -33,9 +33,10 @@ public class Bullet_Collision : MonoBehaviour
     {
       //  Debug.Log("hello");
         IGetHealthSystem attackable = col.GetComponent<IGetHealthSystem>();
-
+        
         if (attackable != null)
         {
+            
             Destroy (gameObject);
         }
     }

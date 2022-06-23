@@ -25,6 +25,7 @@ public class Necromancer : MonoBehaviour, IGetHealthSystem
 
         if (bullet.name == "Bullet(Clone)")
         {
+            
             Damage(5);
            // Debug.Log("enemy has taken 5 dmg");
         }
@@ -32,6 +33,7 @@ public class Necromancer : MonoBehaviour, IGetHealthSystem
 
     public void Damage(int damage)
     {
+        DamagePopup.Create(transform.position + new Vector3(8,0), damage);
         healthSystem.Damage (damage);
     }
 
