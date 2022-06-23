@@ -31,6 +31,7 @@ public class Necromancer : MonoBehaviour, IGetHealthSystem
     {
         // check to see if enemy got hit by  a bullet, if yes take 5dmg.
         GameObject bullet = col.gameObject;
+       int test = bullet.GetComponent<Bullet_Collision>().damage;
 
         if (bullet.name == "Bullet(Clone)")
         {

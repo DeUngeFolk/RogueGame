@@ -17,14 +17,13 @@ public class PlayerStats : MonoBehaviour, IGetHealthSystem
 
     float IGetHealthSystem.maxHealth => maxHealth;
 
-    private void Start()
-    {
-    }
 
     private void Awake()
     {
         healthSystem = new HealthSystem(maxHealth);
         healthSystem.OnDead += HealthSystem_OnDead;
+        
+        
     }
 
     void OnTriggerEnter2D(Collider2D col)
